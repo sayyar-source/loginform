@@ -32,7 +32,7 @@ class Login extends Component {
             <ScrollView style={{padding: 20}}>
                 <Text 
                     style={{fontSize: 25}}>
-                    Giriş yap
+                    Login
                 </Text>
                 <Text style={{color: 'blue',textAlign:'right'}}
                  onPress={() => navigate('restorepassword')}>
