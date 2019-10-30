@@ -7,16 +7,40 @@ import {
     Button,
     TouchableOpacity,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    Image
     
 } from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import { createAppContainer } from 'react-navigation';
 import{createStackNavigator} from 'react-navigation-stack';
 const { width } = Dimensions.get('window')
+
+class LogoTitle extends React.Component {
+    render() {
+      return (
+
+<Image
+          source={require('./assets/images/logo.jpg')}
+          style={{ width: 50, height: 30 }}
+        />
+
+      );
+    }
+  }
 class Login extends Component {
     static navigationOptions = {
-        title: 'Login',
+        title: 'Home',
+        headerStyle: {
+          backgroundColor: '#f4511e',
+          
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+       headerTitle: () => <LogoTitle  />,
+        
       };
     constructor(props) { 
         super(props); 
@@ -36,12 +60,12 @@ class Login extends Component {
                 </Text>
                 <Text style={{color: 'blue',textAlign:'right'}}
                  onPress={() => navigate('restorepassword')}>
-                   Şifremi unuttum.
+                   Remember Password.
                  </Text>
                 <View style={{marginTop:5, borderColor:'#8C8E90',borderBottomWidth:1,borderTopWidth:1,borderLeftWidth:1,borderRightWidth:1}}>
-                <TextInput style={{borderColor:'#CCCDCE',borderBottomWidth:1}} placeholder='E-posta adresi (mobil hesaplar için telefon no.)' />
+                <TextInput style={{borderColor:'#CCCDCE',borderBottomWidth:1}} placeholder='Email Address (Mobile Number)' />
                 <TextInput 
-                placeholder='şifre'
+                placeholder='Password'
                 placeholderTextColor="gray"
                 secureTextEntry={this.state.showPassword}
                 onChangeText={(password) => this.setState({ password })}    
@@ -49,7 +73,7 @@ class Login extends Component {
                  />
                 </View>
                 <CheckBox
-                title='Şifreyi göster'
+                title='Show Password'
                 checked={this.state.checked}
                 onPress={() => this.setState({checked: !this.state.checked,showPassword:!this.state.showPassword})}
                  />
@@ -58,11 +82,11 @@ class Login extends Component {
                    style={styles.button}
                 onPress={this.onPress}
                    >
-                <Text> Giriş yap </Text>
+                <Text> Login </Text>
                </TouchableOpacity>
                <View style={styles.divider}>
   <View style={styles.hrLine} />
-  <Text style={styles.dividerText}>Amazon hesabiniz yok mu?</Text>
+  <Text style={styles.dividerText}>I dont an account</Text>
   <View style={styles.hrLine} />
 </View>
 <View style={{margin:7}} />
@@ -70,7 +94,7 @@ class Login extends Component {
                    style={styles.button2}
                    onPress={() => this.props.navigation.navigate('Register')}
                    >
-                <Text> Yeni bir Amazon hesabi oluşturun </Text>
+                <Text> Create New account </Text>
                </TouchableOpacity>
                   </ScrollView>
             );
@@ -79,10 +103,17 @@ class Login extends Component {
 class Register extends Component{
     static navigationOptions = {
         title: 'Register',
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
       };
     render(){
         return(
-            <Text> yeni hesap acma</Text>
+            <Text> Create New account</Text>
 
         );
     }
@@ -94,8 +125,10 @@ const RootStack=createStackNavigator(
         Register
     },
     {
-        initialRouteName:'Login'
-    }
+        initialRouteName:'Login',
+     
+    },
+    
 );
 const AppContainer=createAppContainer(RootStack);
 export default class app extends Component{
